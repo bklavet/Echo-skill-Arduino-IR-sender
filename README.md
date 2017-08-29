@@ -1,11 +1,15 @@
 # Echo-skill-Arduino-IR-sender
 alexa skill to have arduino yun send ir signal to a device
 
-#checklist will expand further when complete
-* record ir raw signals from remote
-* placed ir signal codes on arduino yun
-* connect yun to nearbus so rest commands can be sent to the yun and not port forwarding is needed
-* make skill for alexa to send the rest command to the yun.
+Using the IRLIB2 arduino library, I was able to capture raw ir commands for my Pyle PUCRC95 
+robotic vacuum
 
-Then end game is to have my cheap roomba knockoff be controlled by alexa.
-this could be expanded to other ir device.
+Using nearbus on an arduino yun I was able to make an alexa skill that tells nearbus to excute the 
+ir command on the arduino yun.
+
+I can now have Alexa send the IR command to my robotic vacuum to turn it on or have it return to its base station
+no port forwarding required!
+
+This could be expanded for other Infared devices like TV's DVD players, anything with a remote
+the IRLIB2 has alot of popular protocols, but if it isn't recongized you can save your own,
+but with the limited space on the arduino yun, you will be limited to only a few ir commands
