@@ -4,4 +4,10 @@ standby
 home
 dock
 power up
+power down
 return
+stop
+start
+clean
+vacuum
+sweep
