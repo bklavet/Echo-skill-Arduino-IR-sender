@@ -1,0 +1,86 @@
+var http = require('http'); // if going through a proxy that uses SSL change to "require('https');"
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+var local_ip = 'nearbus.net';
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * App ID for the skill
+ */
+ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+var APP_ID = "amzn1.echo-sdk-ams.app.f2a36c58-f9a7-478d-8689-18b0a5ce9b60"; 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+* The AlexaSkill prototype and helper functions
+ */
+var AlexaSkill = require('./AlexaSkill');
+   
+var vacuumControl = function () {
+    AlexaSkill.call(this, APP_ID);
+};
+
+
+// Extend AlexaSkill
+vacuumControl.prototype = Object.create(AlexaSkill.prototype);
+vacuumControl.prototype.constructor = vacuumControl;
+
+//Ignore Certificate errors if using HTTPS communication
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
+vacuumControl.prototype.intentHandlers = {
+        doorIntent: function (intent, session, response) {
+        
+        //No matter what she wants to tell you her opinion.
+        
+        function satisfyAlexa() {
+                        response.tell("OK");
+                        };
+        
+        // Obtain User Intent
+        switch(intent.slots.Control.value) {
+                
+                // Same button is used
+				case "start":
+				case "quit": 
+				case "shutdown":
+				case "standby":
+                      path = '/v1/api_transp/NB10XXXX?user=XXXXXXX&pass=XXXXXX&method=POST&reg00=1';
+                break;
+           
+				case "home":
+				case "dock": 
+				case "power up":
+				case "return":
+                      path = '/v1/api_transp/NB10XXXX?user=XXXXXXX&pass=XXXXXX&method=POST&reg01=1';
+                break;
+				
+				default:
+                         {
+                         response.tell("I was unable to talk to nearbus.");
+                      }
+                break;
+
+				
+        } 
+		var options = {
+                     host: local_ip,
+                     path: '' + path // Modify if path is prefixed 
+					
+					
+					 
+                    };
+          var req = http.request(options, satisfyAlexa);
+          req.end();						
+        }
+}
+
+
+exports.handler = function (event, context) {
+       
+        var vacuumControl = new vacuumControl();
+        vacuumControl.execute(event, context);
+        
+};

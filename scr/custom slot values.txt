@@ -1,0 +1,7 @@
+quit
+shutdown
+standby
+home
+dock
+power up
+return
