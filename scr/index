@@ -31,7 +31,7 @@ vacuumControl.prototype.constructor = vacuumControl;
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 vacuumControl.prototype.intentHandlers = {
-        doorIntent: function (intent, session, response) {
+        vacuumIntent: function (intent, session, response) {
         
         //No matter what she wants to tell you her opinion.
         
@@ -80,7 +80,7 @@ vacuumControl.prototype.intentHandlers = {
 
 exports.handler = function (event, context) {
        
-        var vacuumControl = new vacuumControl();
-        vacuumControl.execute(event, context);
+        var VacuumControl = new vacuumControl();
+        VacuumControl.execute(event, context);
         
 };
