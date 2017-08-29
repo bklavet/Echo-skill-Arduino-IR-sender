@@ -44,22 +44,28 @@ vacuumControl.prototype.intentHandlers = {
                 
                 // Same button is used
 				case "start":
-				case "quit": 
-				case "shutdown":
-				case "standby":
+				case "pause":
+				case "stand by":
+				case "stop":
+				case "resume":
+				case "vacuume":
+				case "clean":
+				case "sweep":
                       path = '/v1/api_transp/NB10XXXX?user=XXXXXXX&pass=XXXXXX&method=POST&reg00=1';
                 break;
            
 				case "home":
-				case "dock": 
-				case "power up":
+				case "quit": 
+				case "charge up":
 				case "return":
+				case "shut down":
+				case "power down":
                       path = '/v1/api_transp/NB10XXXX?user=XXXXXXX&pass=XXXXXX&method=POST&reg01=1';
                 break;
 				
 				default:
                          {
-                         response.tell("I was unable to talk to nearbus.");
+                         response.tell("I did not recognize any case words.");
                       }
                 break;
 

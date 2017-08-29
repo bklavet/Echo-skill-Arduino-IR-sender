@@ -1,13 +1,14 @@
-quit
-shutdown
-standby
-home
-dock
-power up
-power down
-return
+pause
+stand by
 stop
-start
+resume
+home
+quit
+charge up
+return
+shut down
+power down
 clean
 vacuum
 sweep
+start
